@@ -1,3 +1,4 @@
+import 'package:demo_state_management/bloc_page.dart';
 import 'package:flutter/material.dart';
 
 import 'app_util.dart';
@@ -25,13 +26,22 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Flutter State Management demo'),
       ),
-      body: Center(
+      body: Container(
+        width: double.infinity,
+        padding: EdgeInsets.only(top: 20),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+//          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.max,
           children: <Widget>[
             RaisedButton(
               child: Text('setState()'),
               onPressed: () => goToScreen(context, SetStatePage()),
+            ),
+            SizedBox(height: 10),
+            RaisedButton(
+              child: Text('BLoC - Business Logic Component'),
+              onPressed: () => goToScreen(context, BlocPage()),
             ),
             SizedBox(height: 10),
           ],
