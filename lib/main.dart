@@ -2,6 +2,7 @@ import 'package:demo_state_management/bloc_page.dart';
 import 'package:flutter/material.dart';
 
 import 'app_util.dart';
+import 'provider_page.dart';
 import 'set_state_page.dart';
 
 void main() => runApp(MyApp());
@@ -44,6 +45,10 @@ class MyHomePage extends StatelessWidget {
               onPressed: () => goToScreen(context, BlocPage()),
             ),
             SizedBox(height: 10),
+            RaisedButton(
+              child: Text('Provider'),
+              onPressed: () => goToScreen(context, ProviderPage()),
+            ),
           ],
         ),
       ),

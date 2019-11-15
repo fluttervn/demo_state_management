@@ -1,25 +1,26 @@
-import 'package:bloc/bloc.dart';
 import 'package:demo_state_management/app_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 
-class BlocPage extends StatelessWidget {
+class ProviderPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('BLoC'),
+        title: Text('Provider'),
       ),
-      body: BlocProvider<CounterBloc>(
-        builder: (context) => CounterBloc(),
-        child: BlocPageContent(),
+      body: MultiProvider(
+        providers: [
+          ChangeNotifierProvider(builder: (_) => Counter()),
+        ],
+        child: ProviderPageContent(),
       ),
     );
   }
 }
 
-class BlocPageContent extends StatelessWidget {
+class ProviderPageContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -35,14 +36,17 @@ class BlocPageContent extends StatelessWidget {
           height10,
           RaisedButton(
             child: Text('Increase number'),
-            onPressed: () => BlocProvider.of<CounterBloc>(context)
-                .add(CounterEvent.increment),
+            onPressed: () =>
+                Provider.of<Counter>(context, listen: false).increment(),
           ),
           height10,
-          BlocBuilder<CounterBloc, int>(
-            builder: (context, number) {
+          Consumer<Counter>(
+            builder: (context, counter, _) {
               return Container(
-                child: Text('Number is: $number', style: textResultStyle),
+                child: Text(
+                  'Number is: ${Provider.of<Counter>(context).count}',
+                  style: textResultStyle,
+                ),
                 padding: EdgeInsets.all(5),
                 color: createRandomColor(),
               );
@@ -54,21 +58,13 @@ class BlocPageContent extends StatelessWidget {
   }
 }
 
-enum CounterEvent { increment, decrement }
+class Counter with ChangeNotifier {
+  int _count = 0;
 
-class CounterBloc extends Bloc<CounterEvent, int> {
-  @override
-  int get initialState => 0;
+  int get count => _count;
 
-  @override
-  Stream<int> mapEventToState(CounterEvent event) async* {
-    switch (event) {
-      case CounterEvent.decrement:
-        yield state - 1;
-        break;
-      case CounterEvent.increment:
-        yield state + 1;
-        break;
-    }
+  void increment() {
+    _count++;
+    notifyListeners();
   }
 }
