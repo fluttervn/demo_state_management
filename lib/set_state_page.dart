@@ -28,13 +28,17 @@ class _SetStatePageState extends State<SetStatePage> {
             textGuideTouchButtonToIncrease(),
             height10,
             RaisedButton(
-              child: Text('Increase'),
+              child: Text('Increase number'),
               onPressed: () => setState(() {
                 _number++;
               }),
             ),
             height10,
-            Text('Number is: $_number', style: textResultStyle),
+            Container(
+              child: Text('Number is: $_number', style: textResultStyle),
+              padding: EdgeInsets.all(5),
+              color: createRandomColor(),
+            ),
           ],
         ),
       ),
