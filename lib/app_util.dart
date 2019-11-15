@@ -17,8 +17,8 @@ Color createRandomColor() {
 
 Widget textGuideRebuildWarning() {
   return Text(
-    'Note: Each time build() method is invoked, its background color will '
-    'be randomized',
+    'Note: When you see the background color of the widget is change randomly, '
+    'it means that widget is rebuilt.',
     style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
   );
 }
@@ -32,7 +32,6 @@ Widget textGuideTouchButtonToIncrease() {
 
 TextStyle textResultStyle = TextStyle(
   fontSize: 18,
-  fontWeight: FontWeight.bold,
 );
 
 SizedBox height10 = SizedBox(height: 10);
